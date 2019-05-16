@@ -134,7 +134,8 @@ export default class StockTicker extends React.Component {
         return inputValue;
       };
   
-      handleChange(event) {
+    handleChange(event) {
+        event.preventDefault();
         const value = event.target.value;
         this.props.onChange(value);
         this.setState({

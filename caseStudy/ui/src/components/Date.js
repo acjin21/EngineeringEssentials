@@ -37,7 +37,6 @@ export default class Date extends React.Component {
             startDate: moment()
         };
       this.handleChange = this.handleChange.bind(this);
-      this.componentDidMount = this.componentDidMount.bind(this);
     }
 
     componentDidMount() {
