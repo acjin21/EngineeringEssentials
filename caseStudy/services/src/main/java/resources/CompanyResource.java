@@ -51,4 +51,12 @@ public class CompanyResource {
         return Response.ok().entity("No matches found for ticker " + symbol).build();
     }
 
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("all")
+    public Response getCompanyInfo() throws Exception{
+        List<Company> companies = FileHelper.readAllCompanies("companyInfo.json");
+        return Response.ok().entity(companies).build();
+    }
+
 }
