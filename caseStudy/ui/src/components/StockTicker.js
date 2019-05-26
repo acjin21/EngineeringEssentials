@@ -58,7 +58,7 @@ import axios from 'axios';
  * https://github.com/ericgio/react-bootstrap-typeahead/blob/master/example/examples/AsyncExample.react.js
  */
 
- 
+
 export default class StockTicker extends React.Component {
 
     /**
@@ -79,7 +79,7 @@ export default class StockTicker extends React.Component {
         super(props);
         this.state = {
             showcompanyinfo: false, //TODO: Use this boolean to determine if the company information should be rendered
-            company : {
+            company: {
                 symbol: '',
                 name: '',
                 city: '',
@@ -99,52 +99,52 @@ export default class StockTicker extends React.Component {
         this.filterTickers = this.filterTickers.bind(this);
     }
 
-    componentDidMount(){
-        axios.get("api/stock/all")
-         .then((response) => {
+    componentDidMount() {
+        axios.get("stock/all")
+            .then((response) => {
 
-             this.setState(state => {
-                 response.data.forEach( (ticker) => {
-                     state.tickerList.push({value: ticker, label:ticker})
-                 })
-                 return state;
-             })
-         })
-         .catch()
+                this.setState(state => {
+                    response.data.forEach((ticker) => {
+                        state.tickerList.push({ value: ticker, label: ticker })
+                    })
+                    return state;
+                })
+            })
+            .catch()
     }
 
-    componentWillReceiveProps(props){
-        if(this.state.inputValue != props.ticker){
+    componentWillReceiveProps(props) {
+        if (this.state.inputValue != props.ticker) {
             this.setState({
-                inputValue:props.ticker
+                inputValue: props.ticker
             })
         }
     }
 
     //handleChange(event) {
-      //  if (event.length > 0) {
-            /**
-             * TODO
-             * Make a request to your service to GET company information for the selected company and set it in state.
-             * The information you will need to determine the URL will be contained in the 'event[0]' object,
-             * e.g. event[0] (event[0].symbol if your options are an array of objects) provides you the symbol selected.
-             * The URL will be on your localhost (e.g. http://localhost:8000/service_path/some_param) where
-             * your service is running. Your service MUST be running for the request to work (you can add a catch function
-             * to handle errors). If you successfully retrieve this information, you can set the state objects
-             * and render it.
-             */
-        //    this.setState({showinfo: true});
+    //  if (event.length > 0) {
+    /**
+     * TODO
+     * Make a request to your service to GET company information for the selected company and set it in state.
+     * The information you will need to determine the URL will be contained in the 'event[0]' object,
+     * e.g. event[0] (event[0].symbol if your options are an array of objects) provides you the symbol selected.
+     * The URL will be on your localhost (e.g. http://localhost:8000/service_path/some_param) where
+     * your service is running. Your service MUST be running for the request to work (you can add a catch function
+     * to handle errors). If you successfully retrieve this information, you can set the state objects
+     * and render it.
+     */
+    //    this.setState({showinfo: true});
 
-            //this.props.onChange(..);  Call this.props.onChange with the selected symbol to propagate it
-            // to the App component, which will handle it via its own onChane prop,
-            // ultimately  used to fetch the data for the LineChart component.
+    //this.props.onChange(..);  Call this.props.onChange with the selected symbol to propagate it
+    // to the App component, which will handle it via its own onChane prop,
+    // ultimately  used to fetch the data for the LineChart component.
 
-       // }
-       // else {
-       //     this.setState({showinfo: false});
-       //     this.props.onChange(undefined);
-       // }
-   // }
+    // }
+    // else {
+    //     this.setState({showinfo: false});
+    //     this.props.onChange(undefined);
+    // }
+    // }
 
     handleInputChange(newValue) {
         //console.log(newValue)
@@ -154,24 +154,24 @@ export default class StockTicker extends React.Component {
         // this.setState({
         //     showcompanyinfo: true
         //   });
-      };
-  
-      handleChange(valuetype,actionmeta) {
-          if(actionmeta.action == "select-option"){
-              this.props.onChange(valuetype.value)
-              this.setState({
-                  inputValue:valuetype.value
-              })
-          }
-      };
-  
-      filterTickers(inputValue) {
-        return this.state.tickerList.filter(i =>
-          i.label.toLowerCase().includes(inputValue.toLowerCase())
-        );
-      };
+    };
 
-  
+    handleChange(valuetype, actionmeta) {
+        if (actionmeta.action == "select-option") {
+            this.props.onChange(valuetype.value)
+            this.setState({
+                inputValue: valuetype.value
+            })
+        }
+    };
+
+    filterTickers(inputValue) {
+        return this.state.tickerList.filter(i =>
+            i.label.toLowerCase().includes(inputValue.toLowerCase())
+        );
+    };
+
+
 
 
     render() {
@@ -187,38 +187,19 @@ export default class StockTicker extends React.Component {
         return (
             <div className="stockticker">
                 <div className="ticker-input">
-                  <div className="stockticker-typeahead">
-                  <pre>Stock Ticker: </pre>
-                    {/* <AsyncSelect
-                      placeholder='Search...'
-                      cacheOptions
-                      backspaceRemovesValue={true}
-                      loadOptions={this.promiseOptions}
-                      defaultOptions={this.state.tickerList}
-                      onInputChange={this.handleInputChange} 
-                      onChange = {this.handleChange}
-                    /> */}
-                    <Select
-                      placeholder='Search...'
-                      cacheOptions
-                      backspaceRemovesValue={true}
-                      //loadOptions={this.promiseOptions}
-                      options={this.state.tickerList}
-                      onInputChange={this.handleInputChange} 
-                      onChange = {this.handleChange}
-                      value = {{label:this.state.inputValue, value:this.state.inputValue}}
-                    />
-                      {/* useful props if you decide to use react-bootstrap-typeahead
-                        <Typeahead
-                             align=
-                             filterBy=
-                             labelKey=
-                             onChange={this.handleChange}
-                             minLength=
-                             placeholder="Company Name/Ticker"
-                             options=
+                    <div className="stockticker-typeahead">
+                        <pre>Stock Ticker: </pre>
+                        <Select
+                            placeholder='Search...'
+                            cacheOptions
+                            backspaceRemovesValue={true}
+                            //loadOptions={this.promiseOptions}
+                            options={this.state.tickerList}
+                            onInputChange={this.handleInputChange}
+                            onChange={this.handleChange}
+                            value={{ label: this.state.inputValue, value: this.state.inputValue }}
                         />
-                      */}
+
                     </div>
                 </div>
                 {

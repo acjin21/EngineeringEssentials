@@ -36,13 +36,13 @@ export default class Charts extends React.Component {
         this.dataSourceHelper(nextProps);
     }
 
-    componentWillReceiveProps(props){
+    componentWillReceiveProps(props) {
         this.dataSourceHelper(props);
     }
 
     dataSourceHelper(props) {
         props = props || this.props;
-        
+
         /**
          * TODO
          * Write a helper method to make an AJAX HTTP request to your service for the
@@ -82,34 +82,34 @@ export default class Charts extends React.Component {
 
         //?startDate=${props.startDate.format('l')}&endDate=${props.endDate.format('l')}
         console.log(props.ticker)
-        axios.get(`api//stock/${props.ticker}`,{
+        axios.get(`stock/${props.ticker}`, {
             params: {
-              startDate: props.startDate.format('l'),
-              endDate:   props.endDate.format('l')
+                startDate: props.startDate.format('l'),
+                endDate: props.endDate.format('l')
             }
-          })
-        .then((response) => {
-            // handle success
-            console.log(response)
-            console.log(response.data);
-            this.setState({
-                data:response.data,
-                ticker:props.ticker
+        })
+            .then((response) => {
+                // handle success
+                console.log(response)
+                console.log(response.data);
+                this.setState({
+                    data: response.data,
+                    ticker: props.ticker
+                })
             })
-        })
-        .catch( (error) => {
-            console.log(error)
-        })
+            .catch((error) => {
+                console.log(error)
+            })
 
     }
-            
+
     render() {
         /**
          * TODO
          * Render your LineChart component and pass the data for the chart to display via props
          */
-        return(
-            <LineChart  data = {this.state.data} ticker = {this.state.ticker}/>
+        return (
+            <LineChart data={this.state.data} ticker={this.state.ticker} />
         );
     }
 }
