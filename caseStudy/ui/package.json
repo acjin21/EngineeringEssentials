@@ -1,5 +1,5 @@
 {
-  "name": "rename-this-to-your-app-name",
+  "name": "stock-visualizer-gsee",
   "version": "0.0.1",
   "private": true,
   "proxy": "http://localhost:8080/",
